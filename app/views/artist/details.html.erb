@@ -1,0 +1,15 @@
+<%= link_to "Back to Search", :controller => :artist, :action => :search%>
+<%= link_to "Logout", :controller => :access, :action => :login%><br/>
+<% label_tag(:artistname)%> <%= @result['artist']['name']  %></br>
+<%= label_tag(:URL)  %> <%= link_to(@result['artist']['name'], @result['artist']['url'] ) %></br>
+<%= label_tag(:listeners) %> <%= @result['artist']['stats']['listeners']  %></br>
+<%= label_tag(:playcount) %> <%= @result['artist']['stats']['playcount']  %></br>
+<%= label_tag(:SUMMARY) %></br>  <%= strip_links(@result['artist']['bio']['summary'])  %></br>
+<%= image_tag(@result['artist']['image'][3]['#text'], :alt => "rss feed")%>
+
+
+
+<p>Similar Artists</p>
+<%@similar['similarartists']['artist'].each do |name|%>
+<%=link_to name["name"], {:controller => 'artist' , :action => 'details', :artistname =>name["name"]}%><br/>
+<%end%>

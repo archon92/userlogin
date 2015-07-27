@@ -1,0 +1,27 @@
+<% if !flash[:test].blank?%>
+<%=flash[:test]%>
+<% end %>
+
+<%= link_to "Logout", :controller => :access, :action => :login%><br/>
+
+<%=form_tag(:action => 'details') do  %>
+  <table>
+    <tr>
+      <td><%= label_tag(:search) %> </td>
+      <td><%= text_field_tag(:artistname) %> </td>
+    </tr>
+    <tr>     
+    <tr>
+      <td><%= submit_tag("Search") %> </td>    
+    </tr>
+  </table>
+
+  <p>Previous searches</p> 
+  <% @art.each do|artist|%>
+  <%= link_to artist.artistname , {:controller => 'artist' ,:action => 'details',:artistname =>artist.artistname}%><br/>
+  <% end %>
+
+
+<% end %>
+
+
