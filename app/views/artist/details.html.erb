@@ -1,15 +1,42 @@
-<%= link_to "Back to Search", :controller => :artist, :action => :search%>
-<%= link_to "Logout", :controller => :access, :action => :login%><br/>
-<% label_tag(:artistname)%> <%= @result['artist']['name']  %></br>
-<%= label_tag(:URL)  %> <%= link_to(@result['artist']['name'], @result['artist']['url'] ) %></br>
-<%= label_tag(:listeners) %> <%= @result['artist']['stats']['listeners']  %></br>
-<%= label_tag(:playcount) %> <%= @result['artist']['stats']['playcount']  %></br>
-<%= label_tag(:SUMMARY) %></br>  <%= strip_links(@result['artist']['bio']['summary'])  %></br>
+<%= stylesheet_link_tag "artist" %> 
+<div class="navigation">
+<ul id="nav-menu">
+<li>
+<%= link_to "Home", :controller => :artist, :action => :search%>
+</li>
+<li>
+<%= link_to "Logout", :controller => :access, :action => :login%>
+</li>
+</ul>
+</div>
+
+<div>
+<h2 class="white-font"><% label_tag(:artistname)%> <%= @result['artist']['name']  %></h2>
+
+<span class="white-font">Visit their Home page <%= link_to(@result['artist']['name'], @result['artist']['url'] ) %></span></br>
+
+<span class="white-font">Number of Listeners:  <%= @result['artist']['stats']['listeners']  %></span></br>
+
+<span class="white-font">Songs Play Count:<%= @result['artist']['stats']['playcount']  %></span></br>
+</div>
+
+<div>
+<h3 class="white-font">Biography</h3>  
+<p class="white-font"><%= strip_links(@result['artist']['bio']['summary'])  %></p>
+</div>
+
+<div>
 <%= image_tag(@result['artist']['image'][3]['#text'], :alt => "rss feed")%>
+</div>
 
 
-
-<p>Similar Artists</p>
-<%@similar['similarartists']['artist'].each do |name|%>
-<%=link_to name["name"], {:controller => 'artist' , :action => 'details', :artistname =>name["name"]}%><br/>
-<%end%>
+<div class="search-history">
+  <h2>Similar Artists</h2> 
+  <ul id="side-menu">
+  <%@similar['similarartists']['artist'].each do |name|%>
+  <li>
+  <%=link_to name["name"], {:controller => 'artist' , :action => 'details', :artistname =>name["name"]}%><br/>
+  </li>
+  <% end %>
+  </ul>
+</div>

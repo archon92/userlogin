@@ -1,27 +1,36 @@
+<%= stylesheet_link_tag "artist" %> 
+
 <% if !flash[:test].blank?%>
 <%=flash[:test]%>
 <% end %>
 
-<%= link_to "Logout", :controller => :access, :action => :login%><br/>
+<div class="navigation">
+<ul id="nav-menu">
+<li>
+<%= link_to "Logout", :controller => :access, :action => :login%>
+</li>
+</ul>
+</div>
 
+<div class="search">
+<h3>Search</h3>
 <%=form_tag(:action => 'details') do  %>
-  <table>
-    <tr>
-      <td><%= label_tag(:search) %> </td>
-      <td><%= text_field_tag(:artistname) %> </td>
-    </tr>
-    <tr>     
-    <tr>
-      <td><%= submit_tag("Search") %> </td>    
-    </tr>
-  </table>
-
-  <p>Previous searches</p> 
-  <% @art.each do|artist|%>
-  <%= link_to artist.artistname , {:controller => 'artist' ,:action => 'details',:artistname =>artist.artistname}%><br/>
-  <% end %>
-
-
+      <%= text_field_tag(:artistname) %>
+      <%= submit_tag("Search") %>   
 <% end %>
+</div>
+
+<div class="search-history">
+  <h2>Previously Searched Artists</h2> 
+  <ul id="side-menu">
+  <% @art.each do|artist|%>
+  <li>
+  <%= link_to artist.artistname , {:controller => 'artist' ,:action => 'details',:artistname =>artist.artistname}%><br/>
+  </li>
+  <% end %>
+  </ul>
+</div>
+
+
 
 
