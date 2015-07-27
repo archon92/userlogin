@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'access/index'
   get 'login', :to =>"access#login"
+  get '/', :to =>"access#login"
 
   get 'access/login'
   get 'access/attempt_login'
